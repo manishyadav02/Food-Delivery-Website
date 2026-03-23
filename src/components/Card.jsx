@@ -4,47 +4,38 @@ import { GiChickenOven } from "react-icons/gi";
 import { Leaf } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { AddItem } from "../redux/cartSlice";
-import { toast } from "react-toastify";
+
 function Card({ name, image, id, price, type }) {
   const dispatch = useDispatch();
 
-  const addItems = () => {
-    dispatch(
-      AddItem({
-        id: id,
-        name: name,
-        price: price,
-        image: image,
-        qty: 1,
-        type: type,
-      }),
-      
-    );
-    //  toast.success(`Item is added to cart`);
-  };
   return (
-    <div
-      key={id}
-      className="w-60 h-80 bg-white mt-10 p-4 rounded-lg flex flex-col gap-3 border-0 hover:border-green-600 hover:border-4 transition-all duration-200 ml-4 shadow-xl">
-      <div className="w-full h-[65%] bg-white rounded-lg overflow-hidden">
-        <img src={image} alt="img" className="object-cover" />
+    <div className="w-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-100 flex flex-col">
+      <div className="relative h-48 w-full overflow-hidden">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+        />
       </div>
-      <div>
-        <span className="font-semibold">{name}</span>
-      </div>
-      <div className="flex w-full relative text-green-500 font-semibold">
-        <span>RS. {price}/-</span>
-        <div className="flex absolute right-0 text-green-500 gap-2 items-center">
-          {type === "veg" ? <Leaf /> : <GiChickenOven />}
 
-          <span>{type}</span>
+      <div className="p-4 flex flex-col flex-1 gap-2">
+        <div className="flex justify-between items-start">
+          <h3 className="font-bold text-gray-800 line-clamp-1">{name}</h3>
+          <div
+            className={`flex items-center gap-1 text-[10px] uppercase font-bold ${type === "veg" ? "text-green-600" : "text-red-600"}`}>
+            {type === "veg" ? <Leaf size={14} /> : <GiChickenOven size={14} />}
+            <span>{type}</span>
+          </div>
         </div>
-      </div>
-      <div>
+
+        <p className="text-green-600 font-bold text-lg">₹{price}</p>
+
         <button
-          className="w-full bg-green-600 h-8 rounded-lg font-semibold hover:cursor-pointer hover:bg-green-300 transition text-white"
-          onClick={addItems}>
-          Add to Dish
+          className="mt-auto w-full bg-green-600 py-2 rounded-lg font-semibold text-white hover:bg-green-700 active:scale-95 transition-all"
+          onClick={() =>
+            dispatch(AddItem({ id, name, price, image, qty: 1, type }))
+          }>
+          Add to Cart
         </button>
       </div>
     </div>
