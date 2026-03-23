@@ -34,10 +34,10 @@ function Home() {
   return (
     <div className="bg-slate-100 min-h-screen w-full pb-8">
       <Nav />
-
+      {/* Category Section */}
      
       {!input && (
-        <div className="flex overflow-x-auto md:flex-wrap justify-start md:justify-center gap-3 px-4 py-6 scrollbar-hide">
+        <div className="flex overflow-x-auto md:flex-wrap justify-start md:justify-center gap-3 px-4 py-6 scrollbar-hide pt-30">
           {categories.map((i) => (
             <div
               key={i.id}
@@ -52,7 +52,7 @@ function Home() {
         </div>
       )}
 
-   
+      
       <div className="max-w-7xl mx-auto px-4 mt-4">
         {categ.length > 0 ? (
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
